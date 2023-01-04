@@ -1,0 +1,11 @@
+h1{
+    color:crimson;
+}
+.bg-success{
+    background-color: aquamarine;
+    color:#409940;
+    padding: 4px;
+    border:#308830 2px solid;
+    border-radius: 4px;
+    box-shadow: 3px 3px 6px #404040;
+}
