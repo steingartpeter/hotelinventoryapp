@@ -7,6 +7,8 @@
   Rooms list
   <table class="table std-table">
     <tr>
+      <th>Rec.Index</th>
+      <th>Even/Odd</th>
       <th>Room Number</th>
       <th>Room Type</th>
       <th>Room Price</th>
@@ -14,7 +16,11 @@
       <th>Checkin Time</th>
       <th>Checkout Time</th>
     </tr>
-    <tr *ngFor="let room of roomList">
+    <tr
+      *ngFor="let room of roomList; let e = even; let o = odd; let idx = index"
+    >
+      <td>{{ idx }}</td>
+      <td [ngClass]="{ even: e, odd: o }">{{ e ? "Even" : "Odd" }}</td>
       <td>{{ room.roomNumber }}</td>
       <td>{{ room.roomType }}</td>
       <td>{{ room.price }}</td>
