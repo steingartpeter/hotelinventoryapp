@@ -1,0 +1,16 @@
+.std-table {
+  border: 4px double #858585;
+  border-radius: 6px;
+  border-collapse: collapse;
+}
+.std-table tr th {
+  border: 2px solid #202066;
+  background-color: #c0c0ca;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  padding: 2px 10px;
+  box-shadow: inset 2px 2px 4px #606060;
+}
+.std-table tr td {
+  border: 1px solid #404040;
+  padding: 1px 6px;
+}
