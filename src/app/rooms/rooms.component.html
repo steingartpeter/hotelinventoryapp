@@ -1,7 +1,16 @@
 <h1>Welcome to {{ hotelName }}</h1>
 <div *ngIf="hideRooms">
-  Number of rooms: <span [innerText]="numberOfRooms"></span>
+  Number of rooms:
+  <div
+    *ngIf="rooms?.availableRooms !== undefined && rooms.availableRooms > 0"
+    [ngStyle]="{ color: 'green' }"
+    [innerText]="numberOfRooms"
+  ></div>
 </div>
+
+<!-- json pipe for showing json data formatted -->
+<!-- <pre>{{ roomList | json }}</pre> -->
+
 <!-- {{ rooms ?? "No rooms" }} -->
 <div *ngIf="rooms?.availableRooms !== undefined && rooms.availableRooms > 0">
   Rooms list
@@ -15,18 +24,27 @@
       <th>Room Amenities</th>
       <th>Checkin Time</th>
       <th>Checkout Time</th>
+      <th>Rating</th>
     </tr>
+    <!-- With SLIPCE pipe we can use only a portion of an array, dont use on larga datasets, it is terribly slow! -->
     <tr
-      *ngFor="let room of roomList; let e = even; let o = odd; let idx = index"
+      [ngClass]="e ? 'even' : 'odd'"
+      *ngFor="
+        let room of roomList | slice : 0 : 10;
+        let e = even;
+        let o = odd;
+        let idx = index
+      "
     >
       <td>{{ idx }}</td>
-      <td [ngClass]="{ even: e, odd: o }">{{ e ? "Even" : "Odd" }}</td>
+      <td>{{ e ? "Even" : "Odd" }}</td>
       <td>{{ room.roomNumber }}</td>
-      <td>{{ room.roomType }}</td>
-      <td>{{ room.price }}</td>
+      <td>{{ room.roomType | titlecase }}</td>
+      <td>{{ room.price | currency : "EUR" }}</td>
       <td>{{ room.amenities }}</td>
-      <td>{{ room.checkinTime | date }}</td>
+      <td>{{ room.checkinTime | date : "yyyy-MM-dd" }}</td>
       <td>{{ room.checkoutTime | date }}</td>
+      <td>{{ room.rating | number : "1.1-3" : "hu" }}</td>
     </tr>
   </table>
 </div>
